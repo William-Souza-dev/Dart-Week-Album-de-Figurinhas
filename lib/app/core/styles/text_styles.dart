@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 import 'package:fwc_album_app/app/core/ui/styles/colors_app.dart';
 
@@ -48,6 +48,11 @@ class TextStyles {
 
   TextStyle get labelTextField =>
       textSecundaryFontRegular.copyWith(color: ColorsApp.i.greyDark);
+
+  TextStyle get titleWhite => textPrimaryFontBold.copyWith(
+        color: Colors.white,
+        fontSize: 22,
+      );
 }
 
 extension TextStylesExtensions on BuildContext {

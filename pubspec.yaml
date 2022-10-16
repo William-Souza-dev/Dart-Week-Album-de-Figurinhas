@@ -30,10 +30,15 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.2
+  dio: ^4.0.6
   flutter:
     sdk: flutter
-  top_snackbar_flutter: ^2.1.1
+  flutter_dotenv: ^5.0.2
+  flutter_getit: ^1.2.1
   loading_animation_widget: ^1.2.0+3
+  shared_preferences: ^2.0.15
+  top_snackbar_flutter: ^2.1.1
+  validatorless: ^1.2.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -51,8 +56,9 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-     - assets/images/
-     - assets/images/flags/
+    - .env
+    - assets/images/
+    - assets/images/flags/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
