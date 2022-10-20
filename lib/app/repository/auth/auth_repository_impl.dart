@@ -11,45 +11,53 @@ import 'package:fwc_album_app/app/repository/auth/auth_repository.dart';
 class AuthRepositoryImpl implements AuthRepository {
   final CustomDio dio;
 
-  AuthRepositoryImpl({required this.dio});
+  AuthRepositoryImpl({required this.dio}); //recebe e ja envia para o atributo
 
   @override
   Future<String> login(
       {required String email, required String password}) async {
     try {
+      //sempre colocar try catch em chamadas de serviço
       final result = await dio.post('/api/auth', data: {
         'email': email,
         'password': password,
       });
+
       final accessToken = result.data['access_token'];
+
       if (accessToken == null) {
         throw UnauthhorizedException();
       }
+
       return accessToken;
     } on DioError catch (e, s) {
-      log('Erro ao relizar o login', error: e, stackTrace: s);
-      if (e.response?.statusCode == 401) {
+      log('Erro ao relalizar login', error: e, stackTrace: s);
+
+      if (e.response?.statusCode == 4001) {
         throw UnauthhorizedException();
       }
-      throw RepositoryExceptions(message: 'Erro ao realizar login');
+
+      throw RepositoryException(message: 'Erro ao realizar login');
     }
   }
 
   @override
   Future<void> logout() {
+    // TODO: implement logout
     throw UnimplementedError();
   }
 
   @override
   Future<void> register(RegisterUserModel registerModel) async {
     try {
-      await dio.auth().post(
+      await dio.unAuth().post(
             '/api/register',
             data: registerModel.toMap(),
           );
     } on DioError catch (e, s) {
-      log('Erro ao registrar usuário', error: e, stackTrace: s);
-      throw RepositoryExceptions(message: 'Erro ao registrar usuário');
+      log('Erro ao registrar usuario',
+          error: e, stackTrace: s); //log do dart develop
+      throw RepositoryException(message: 'Erro ao registrar usuario');
     }
   }
 }

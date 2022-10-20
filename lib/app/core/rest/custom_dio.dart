@@ -5,23 +5,35 @@ import 'package:fwc_album_app/app/core/config/env/env.dart';
 import 'package:fwc_album_app/app/core/rest/interceptors/auth_interceptor.dart';
 
 class CustomDio extends DioForNative {
+  //native por ser mobile browser se fosse web
+
   final _authInterceptor = AuthInterceptor();
 
-  CustomDio()
+  CustomDio() //singleton unica instancia
       : super(BaseOptions(
-            baseUrl: Env.i['backend_base_url'] ?? '',
-            connectTimeout: 5000,
-            receiveTimeout: 60000)) {
+          baseUrl: Env.i['backend_base_url'] ??
+              '', //deve aceitar null caso não encontre a chave
+          connectTimeout: 5000, //5 segundos de espera pro back end
+          receiveTimeout: 60000, //60 segundos espera da resposta do back end
+        )) {
     interceptors.add(LogInterceptor(
-        requestBody: true, responseBody: true, requestHeader: true));
+      requestBody: true,
+      responseBody: true,
+      requestHeader: true,
+    )); //construtor interceptor de log do Dio
   }
 
   CustomDio auth() {
     interceptors.add(_authInterceptor);
+    // interceptors.add(LogInterceptor(
+    //   requestBody: true,
+    //   responseBody: true,
+    //   requestHeader: true,
+    // ));
     return this;
   }
 
-  CustomDio unauth() {
+  CustomDio unAuth() {
     interceptors.remove(_authInterceptor);
     return this;
   }

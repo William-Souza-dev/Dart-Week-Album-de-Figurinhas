@@ -5,9 +5,8 @@ import 'package:fwc_album_app/app/core/ui/styles/text_styles.dart';
 
 class ButtonStyles {
   static ButtonStyles? _instance;
-
+  // Avoid self isntance
   ButtonStyles._();
-
   static ButtonStyles get i {
     _instance ??= ButtonStyles._();
     return _instance!;
@@ -18,9 +17,8 @@ class ButtonStyles {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
-        textStyle: TextStyles.i.textSecundaryFontExtraBold.copyWith(
-          fontSize: 14,
-        ),
+        textStyle:
+            TextStyles.i.textSecondaryFontExtraBold.copyWith(fontSize: 14),
       );
 
   ButtonStyle get yellowOutlineButton => OutlinedButton.styleFrom(
@@ -28,9 +26,8 @@ class ButtonStyles {
           borderRadius: BorderRadius.circular(15),
         ),
         side: BorderSide(color: ColorsApp.i.yellow),
-        textStyle: TextStyles.i.textSecundaryFontExtraBold.copyWith(
-          fontSize: 14,
-        ),
+        textStyle:
+            TextStyles.i.textSecondaryFontExtraBold.copyWith(fontSize: 14),
       );
 
   ButtonStyle get primaryButton => ElevatedButton.styleFrom(
@@ -38,9 +35,8 @@ class ButtonStyles {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
-        textStyle: TextStyles.i.textSecundaryFontExtraBold.copyWith(
-          fontSize: 14,
-        ),
+        textStyle:
+            TextStyles.i.textSecondaryFontExtraBold.copyWith(fontSize: 14),
       );
 
   ButtonStyle get primaryOutlineButton => OutlinedButton.styleFrom(
@@ -48,9 +44,8 @@ class ButtonStyles {
           borderRadius: BorderRadius.circular(15),
         ),
         side: BorderSide(color: ColorsApp.i.primary),
-        textStyle: TextStyles.i.textSecundaryFontExtraBold.copyWith(
-          fontSize: 14,
-        ),
+        textStyle:
+            TextStyles.i.textSecondaryFontExtraBold.copyWith(fontSize: 14),
       );
 }
 

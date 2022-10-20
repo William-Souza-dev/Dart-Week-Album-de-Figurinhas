@@ -10,20 +10,21 @@ abstract class RegisterViewImpl extends State<RegisterPage>
     implements RegisterView {
   @override
   void initState() {
-    widget.presenter.view = this;
+    widget.presenter.view = this; //link entre a presenter e a view
     super.initState();
   }
 
   @override
-  void registerEror([String? message]) {
-    hideLoader();
-    showError(message ?? 'Erro ao Registrar Usuário');
+  void registerError([String? message]) {
+    hideLoader(); //esconder o loader do cadastro
+    showError(message ??
+        'Erro ao registrar usuario'); //se a presenter enviar a mensagem exibe ela, senão o texto fixo
   }
 
   @override
-  void registerSucess() {
-    hideLoader();
-    showSuccess('Usuário Cadastrado com Sucesso');
+  void registerSuccess() {
+    hideLoader(); //esconder o loader do cadastro
+    showSucess('Usuario cadastrado com sucesso!');
     Navigator.of(context).pop();
   }
 }

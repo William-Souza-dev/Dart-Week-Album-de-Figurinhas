@@ -4,22 +4,22 @@ class UserModel {
   final int id;
   final String name;
   final String email;
-// total de figurinhas do album
+  final String token;
+//total figurinhas do album
   final int totalAlbum;
-
-// total de figurinhas que eu tenho no album
+  //total figurinhas que eu tenho no album
   final int totalStickers;
-// total de figurinhas repetidas
+  //total figurinhas repetidas
   final int totalDuplicates;
-
-// Total de figurinhas que falta para completar o seu album
+  //total de figurinhas que faltam para completar o album
   final int totalComplete;
-
+  //percentual de conclusão do album
   final int totalCompletePercent;
   UserModel({
     required this.id,
     required this.name,
     required this.email,
+    required this.token,
     required this.totalAlbum,
     required this.totalStickers,
     required this.totalDuplicates,
@@ -32,24 +32,26 @@ class UserModel {
       'id': id,
       'name': name,
       'email': email,
-      'totalAlbum': totalAlbum,
-      'totalStickers': totalStickers,
-      'totalDuplicates': totalDuplicates,
-      'totalComplete': totalComplete,
-      'totalCompletePercent': totalCompletePercent,
+      'token': token,
+      'total_album': totalAlbum,
+      'total_stickers': totalStickers, //Camel case "_s" para snack case "S"
+      'total_duplicates': totalDuplicates,
+      'total_complete': totalComplete,
+      'total_complete_percent': totalCompletePercent,
     };
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      id: map['id'] as int,
-      name: map['name'] as String,
-      email: map['email'] as String,
-      totalAlbum: map['total_album'] as int,
-      totalStickers: map['total_stickers'] as int,
-      totalDuplicates: map['total_duplicates'] as int,
-      totalComplete: map['total_complete'] as int,
-      totalCompletePercent: map['total_complete_percent'] as int,
+      id: map['id'] ?? 0,
+      name: map['name'] ?? '',
+      email: map['email'] ?? '',
+      token: map['token'] ?? '',
+      totalAlbum: map['total_album'] ?? 0,
+      totalStickers: map['total_stickers'] ?? 0,
+      totalDuplicates: map['total_duplicates'] ?? 0,
+      totalComplete: map['total_complete'] ?? 0,
+      totalCompletePercent: map['total_complete_percent'] ?? 0,
     );
   }
 

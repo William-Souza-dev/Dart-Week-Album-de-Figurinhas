@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_getit/flutter_getit.dart';
 
 import 'package:fwc_album_app/app/pages/auth/register/presenter/register_presenter.dart';
@@ -17,6 +16,5 @@ class RegisterRoute extends FlutterGetItPageRoute {
       ];
 
   @override
-  WidgetBuilder get page =>
-      ((context) => RegisterPage(presenter: context.get()));
+  WidgetBuilder get page => (context) => RegisterPage(presenter: context.get());
 }

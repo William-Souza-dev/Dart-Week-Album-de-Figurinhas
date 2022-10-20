@@ -22,7 +22,7 @@ class UserRepositoryImpl implements UserRepository {
       return UserModel.fromMap(result.data);
     } on DioError catch (e, s) {
       log('Erro ao buscar dados do usuario logado', error: e, stackTrace: s);
-      throw RepositoryExceptions(
+      throw RepositoryException(
           message: 'Erro ao buscar dados do usuario logado');
     }
   }

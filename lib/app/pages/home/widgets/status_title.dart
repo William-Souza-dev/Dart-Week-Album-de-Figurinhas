@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:fwc_album_app/app/core/ui/styles/colors_app.dart';
 import 'package:fwc_album_app/app/core/ui/styles/text_styles.dart';
 
-class StatusTitle extends StatelessWidget {
+class StatusTile extends StatelessWidget {
   final Image icon;
   final String label;
   final int value;
 
-  const StatusTitle({
+  const StatusTile({
     Key? key,
     required this.icon,
     required this.label,
@@ -29,7 +29,7 @@ class StatusTitle extends StatelessWidget {
             child: icon,
           ),
         ),
-        contentPadding: EdgeInsets.zero,
+        contentPadding: EdgeInsets.zero, //tirar o espaço do ListTile
         title: Text(
           label,
           style: context.textStyles.textPrimaryFontRegular

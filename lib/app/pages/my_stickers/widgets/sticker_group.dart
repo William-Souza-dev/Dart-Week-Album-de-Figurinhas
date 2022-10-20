@@ -1,35 +1,36 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
+import 'package:flutter_getit/flutter_getit.dart';
 import 'package:fwc_album_app/app/core/ui/styles/colors_app.dart';
 import 'package:fwc_album_app/app/core/ui/styles/text_styles.dart';
 import 'package:fwc_album_app/app/models/groups_stickers.dart';
 import 'package:fwc_album_app/app/models/user_sticker_model.dart';
+import 'package:fwc_album_app/app/pages/my_stickers/presenter/my_stickers_presenter.dart';
 
 class StickerGroup extends StatelessWidget {
   final GroupsStickers group;
   final String statusFilter;
-
   const StickerGroup(
       {super.key, required this.group, required this.statusFilter});
 
   @override
   Widget build(BuildContext context) {
+    //print('build $hashCode'); //teste de hash da build
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start, //inicar centralizado
         children: [
           SizedBox(
             height: 64,
-            // OverFlowBox é para esticar a imagem do jeito que eu quero
             child: OverflowBox(
+              //ignora o overflow e as constraints de tela
               maxWidth: double.infinity,
               maxHeight: double.infinity,
-              // ClipRect para desenhar
               child: ClipRect(
-                // Align diminuir na fatura
+                //permite desenhar na tela
                 child: Align(
+                  //realiza o fator de altura e largura
+
                   alignment: const Alignment(0, -0.1),
                   widthFactor: 1,
                   heightFactor: 0.1,
@@ -50,25 +51,28 @@ class StickerGroup extends StatelessWidget {
           ),
           GridView.builder(
             physics:
-                const NeverScrollableScrollPhysics(), // remover o scroll da column
+                const NeverScrollableScrollPhysics(), //remover scroll do grid e mantem do sliver list
             shrinkWrap: true,
             itemCount: 20,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
+              crossAxisCount: 4, //quantidade de colunas
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
             ),
             itemBuilder: (context, index) {
               final stickerNumber = '${group.stickersStart + index}';
-              final stickList = group.stickers
+              final stickerList = group.stickers
                   .where((sticker) => sticker.stickerNumber == stickerNumber);
-              final sticker = stickList.isNotEmpty ? stickList.first : null;
+              final sticker = stickerList.isNotEmpty ? stickerList.first : null;
+              final countryName = group.countryName;
+              final countryCode = group.countryCode;
 
               final stickerWidget = Sticker(
-                  stickerNumber: stickerNumber,
-                  sticker: sticker,
-                  countryName: group.countryName,
-                  countryCode: group.countryCode);
+                stickerNumber: stickerNumber,
+                sticker: sticker,
+                countryName: group.countryName,
+                countryCode: group.countryCode,
+              );
 
               if (statusFilter == 'all') {
                 return stickerWidget;
@@ -76,14 +80,15 @@ class StickerGroup extends StatelessWidget {
                 if (sticker == null) {
                   return stickerWidget;
                 }
-              } else if (statusFilter == 'repeated') {
+              } else if (statusFilter == 'repeatef') {
                 if (sticker != null && sticker.duplicate > 0) {
                   return stickerWidget;
                 }
               }
+
               return const SizedBox.shrink();
             },
-          ),
+          )
         ],
       ),
     );
@@ -106,13 +111,24 @@ class Sticker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () async {
+        final presenter = context.get<MyStickersPresenter>();
+        await Navigator.of(context).pushNamed('/sticker_detail', arguments: {
+          'countryCode': countryCode,
+          'countryName': countryName,
+          'stickerNumber': stickerNumber,
+          'stickerUser': sticker,
+        });
+        presenter.refresh();
+      },
       child: Container(
         color: sticker != null ? context.colors.primary : context.colors.grey,
         child: Column(
           children: [
+            //Text('${sticker?.duplicate}'), debug da quantidade de duplicadas
             Visibility(
-              visible: (sticker?.duplicate ?? 0) > 0,
+              visible: (sticker?.duplicate ?? 0) >
+                  0, //se maior que zero true, senão false (numero da quantidade de figurinhas)
               maintainSize: true,
               maintainAnimation: true,
               maintainState: true,
@@ -121,19 +137,20 @@ class Sticker extends StatelessWidget {
                 padding: const EdgeInsets.all(2),
                 child: Text(
                   sticker?.duplicate.toString() ?? '',
-                  style: context.textStyles.textSecundaryFontMedium
-                      .copyWith(color: context.colors.yellow),
+                  style: context.textStyles.textSecondaryFontMedium.copyWith(
+                    color: context.colors.yellow,
+                  ),
                 ),
               ),
             ),
             Text(
               countryCode,
-              style: context.textStyles.textSecundaryFontExtraBold.copyWith(
+              style: context.textStyles.textPrimaryFontExtraBold.copyWith(
                   color: sticker != null ? Colors.white : Colors.black),
             ),
             Text(
-              '$stickerNumber',
-              style: context.textStyles.textSecundaryFontExtraBold.copyWith(
+              stickerNumber,
+              style: context.textStyles.textPrimaryFontExtraBold.copyWith(
                   color: sticker != null ? Colors.white : Colors.black),
             ),
           ],

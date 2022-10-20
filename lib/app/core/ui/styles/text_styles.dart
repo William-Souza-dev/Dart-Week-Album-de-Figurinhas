@@ -4,19 +4,17 @@ import 'package:fwc_album_app/app/core/ui/styles/colors_app.dart';
 
 class TextStyles {
   static TextStyles? _instance;
-
+  // Avoid self isntance
   TextStyles._();
-
   static TextStyles get i {
     _instance ??= TextStyles._();
     return _instance!;
   }
 
   String get primaryFont => 'Poppins';
-  String get secundaryFont => 'MPlus1P';
+  String get secondaryFont => 'MPlus1P';
 
-  // primary font
-
+  //Primary Font
   TextStyle get textPrimaryFontRegular =>
       TextStyle(fontWeight: FontWeight.normal, fontFamily: primaryFont);
 
@@ -32,42 +30,42 @@ class TextStyles {
   TextStyle get textPrimaryFontExtraBold =>
       TextStyle(fontWeight: FontWeight.w800, fontFamily: primaryFont);
 
-  // Secundary Font
+  //secondary Font
+  TextStyle get textSecondaryFontRegular =>
+      TextStyle(fontWeight: FontWeight.normal, fontFamily: secondaryFont);
 
-  TextStyle get textSecundaryFontRegular =>
-      TextStyle(fontWeight: FontWeight.normal, fontFamily: secundaryFont);
+  TextStyle get textSecondaryFontMedium =>
+      TextStyle(fontWeight: FontWeight.w600, fontFamily: secondaryFont);
 
-  TextStyle get textSecundaryFontMedium =>
-      TextStyle(fontWeight: FontWeight.w600, fontFamily: secundaryFont);
+  TextStyle get textSecondaryFontBold =>
+      TextStyle(fontWeight: FontWeight.bold, fontFamily: secondaryFont);
 
-  TextStyle get textSecundaryFontBold =>
-      TextStyle(fontWeight: FontWeight.bold, fontFamily: secundaryFont);
+  TextStyle get textSecondaryFontExtraBold =>
+      TextStyle(fontWeight: FontWeight.w800, fontFamily: secondaryFont);
 
-  TextStyle get textSecundaryFontExtraBold =>
-      TextStyle(fontWeight: FontWeight.w800, fontFamily: secundaryFont);
+  TextStyle get labelTextField => textSecondaryFontRegular.copyWith(
+        color: ColorsApp.i.greyDark,
+      );
 
-  TextStyle get labelTextField =>
-      textSecundaryFontRegular.copyWith(color: ColorsApp.i.greyDark);
-
-  TextStyle get textSecundaryFontExtraBoldPrimaryColor =>
-      textSecundaryFontExtraBold.copyWith(color: ColorsApp.i.primary);
+  TextStyle get textSecondaryFontExtraBoldPrimaryColor =>
+      textSecondaryFontExtraBold.copyWith(color: ColorsApp.i.primary);
 
   TextStyle get titleWhite => textPrimaryFontBold.copyWith(
-        color: Colors.white,
         fontSize: 22,
+        color: Colors.white,
       );
 
   TextStyle get titleBlack => textPrimaryFontBold.copyWith(
-        color: Colors.black,
         fontSize: 22,
+        color: Colors.black,
       );
 
-  TextStyle get titlePrimaryColor => textPrimaryFontBold.copyWith(
+  TextStyle get textPrimaryColor => textPrimaryFontBold.copyWith(
         color: ColorsApp.i.primary,
         fontSize: 22,
       );
 }
 
-extension TextStylesExtensions on BuildContext {
+extension TextStyleExtensions on BuildContext {
   TextStyles get textStyles => TextStyles.i;
 }

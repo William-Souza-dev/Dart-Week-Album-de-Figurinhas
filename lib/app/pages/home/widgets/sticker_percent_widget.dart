@@ -7,8 +7,8 @@ import 'package:fwc_album_app/app/core/ui/styles/text_styles.dart';
 
 class StickerPercentWidget extends StatelessWidget {
   final int percent;
-  const StickerPercentWidget({Key? key, required this.percent})
-      : super(key: key);
+
+  const StickerPercentWidget({super.key, required this.percent});
 
   @override
   Widget build(BuildContext context) {
@@ -24,20 +24,20 @@ class StickerPercentWidget extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              '$percent %',
-              style: context.textStyles.titlePrimaryColor,
+              '$percent%',
+              style: context.textStyles.textPrimaryColor,
             ),
           ),
         ),
         SizedBox(
-          width: 150,
-          height: 150,
+          width: 110,
+          height: 110,
           child: Transform.rotate(
             angle: -pi / 2.5,
             child: CircularProgressIndicator(
               value: percent / 100,
-              strokeWidth: 5,
               color: Colors.white,
+              strokeWidth: 5,
               backgroundColor: Colors.white.withOpacity(0.5),
             ),
           ),

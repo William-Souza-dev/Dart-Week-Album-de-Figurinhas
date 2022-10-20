@@ -1,24 +1,24 @@
-import 'package:fwc_album_app/app/core/mvp/fwc_presenter.dart';
 import 'package:fwc_album_app/app/models/groups_stickers.dart';
-import 'package:fwc_album_app/app/pages/my_stickers/view/my_stickers_view.dart';
+import 'package:fwc_album_app/app/pages/my_stickers/presenter/my_stickers_presenter.dart';
 import 'package:fwc_album_app/app/pages/my_stickers/view/my_stickers_view.dart';
 import 'package:fwc_album_app/app/repository/stickers/stickers_repository.dart';
 
-import './my_stickers_presenter.dart';
-
 class MyStickersPresenterImpl implements MyStickersPresenter {
-  final StickersRepository stickersRepository;
-  late final MyStickersView _view;
-  var album = <GroupsStickers>[];
+  var album = <GroupsStickers>[]; //cache da lista para filtro
   var statusSelected = 'all';
   List<String>? countries;
+
+  final StickersRepository stickersRepository;
+  late final MyStickersView _view;
+
   MyStickersPresenterImpl({
     required this.stickersRepository,
   });
+
   @override
   Future<void> getMyAlbum() async {
     album = await stickersRepository.getMyAlbum();
-    _view.loadedPage([...album]);
+    _view.loadedPage([...album]); //duplicando a variavel lista
   }
 
   @override
@@ -34,14 +34,22 @@ class MyStickersPresenterImpl implements MyStickersPresenter {
   void countryFilter(List<String>? countries) {
     this.countries = countries;
     if (countries == null) {
-      //Ataulizar a tela com todos os grupos
+      //atualizar a tela com todos os grupos
       _view.updateAlbum(album);
     } else {
-      // Atualizar a minha lista filtrando os grupos selecionados
+      //atualiar filtrando os grupos selecionados
       final albumFilter = [
         ...album.where((element) => countries.contains(element.countryCode))
       ];
       _view.updateAlbum(albumFilter);
     }
+  }
+
+  @override
+  Future<void> refresh() async {
+    _view.showLoader();
+    await getMyAlbum(); //await por ser future, não é sincrono, precisa esperar o retorno
+    countryFilter(countries);
+    statusFilter(statusSelected);
   }
 }

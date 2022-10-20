@@ -4,12 +4,12 @@ class RegisterUserModel {
   final String name;
   final String email;
   final String password;
-  final String confirmpassword;
+  final String confirmPassword;
   RegisterUserModel({
     required this.name,
     required this.email,
     required this.password,
-    required this.confirmpassword,
+    required this.confirmPassword,
   });
 
   Map<String, dynamic> toMap() {
@@ -17,16 +17,17 @@ class RegisterUserModel {
       'name': name,
       'email': email,
       'password': password,
-      'password_confirmation': confirmpassword,
+      'password_confirmation':
+          confirmPassword, //quem é chamado precisa ter o mesmo nome do objeto da API do back end
     };
   }
 
   factory RegisterUserModel.fromMap(Map<String, dynamic> map) {
     return RegisterUserModel(
-      name: map['name'] as String,
-      email: map['email'] as String,
-      password: map['password'] as String,
-      confirmpassword: map['password_confirmation'] as String,
+      name: map['name'] ?? '',
+      email: map['email'] ?? '',
+      password: map['password'] ?? '',
+      confirmPassword: map['password_confirmation'] ?? '',
     );
   }
 

@@ -22,14 +22,15 @@ class Button extends StatelessWidget {
       this.onPressed,
       this.outline = false});
 
-  Button.primary({
-    super.key,
-    required this.label,
-    this.width,
-    this.height,
-    this.onPressed,
-  })  : style = ButtonStyles.i.primaryButton,
-        labelStyle = TextStyles.i.textSecundaryFontExtraBold,
+  Button.primary(
+      { //não pode ser const por ter inicialização de variaveis no construtor
+      super.key,
+      required this.label,
+      this.width,
+      this.height,
+      this.onPressed})
+      : style = ButtonStyles.i.primaryButton,
+        labelStyle = TextStyles.i.textSecondaryFontExtraBold,
         outline = false;
 
   @override
@@ -41,6 +42,7 @@ class Button extends StatelessWidget {
     );
 
     return SizedBox(
+      //o pai define o tamanho dos filhos
       width: width,
       height: height,
       child: outline

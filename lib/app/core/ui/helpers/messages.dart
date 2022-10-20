@@ -23,7 +23,7 @@ mixin Messages<T extends StatefulWidget> on State<T> {
         ));
   }
 
-  void showSuccess(String message) {
+  void showSucess(String message) {
     showTopSnackBar(
         context,
         CustomSnackBar.success(

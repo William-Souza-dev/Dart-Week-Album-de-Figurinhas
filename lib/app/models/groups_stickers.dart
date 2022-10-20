@@ -34,18 +34,17 @@ class GroupsStickers {
 
   factory GroupsStickers.fromMap(Map<String, dynamic> map) {
     return GroupsStickers(
-      id: map['id'] as int,
-      countryCode: map['country_code'] as String,
-      countryName: map['country_name'] as String,
-      stickersStart: map['stickers_start'] as int,
-      stickersEnd: map['stickers_end'] as int,
-      stickers: List<UserStickerModel>.from(
-        (map['stickers'] as List<dynamic>).map<UserStickerModel>(
-          (x) => UserStickerModel.fromMap(x as Map<String, dynamic>),
+        id: map['id'] as int,
+        countryCode: map['country_code'] as String,
+        countryName: map['country_name'] as String,
+        stickersStart: map['stickers_start'] as int,
+        stickersEnd: map['stickers_end'] as int,
+        stickers: List<UserStickerModel>.from(
+          (map['stickers'] as List).map<UserStickerModel>(
+            (x) => UserStickerModel.fromMap(x as Map<String, dynamic>),
+          ),
         ),
-      ),
-      flag: map['flag'] as String,
-    );
+        flag: map['flag'] as String);
   }
 
   String toJson() => json.encode(toMap());

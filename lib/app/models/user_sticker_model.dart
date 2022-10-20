@@ -21,7 +21,7 @@ class UserStickerModel {
       'id': id,
       'id_user': idUser,
       'id_sticker': idSticker,
-      'duplicate': duplicate,
+      'duplicate_stickers': duplicate,
       'sticker_code': stickerCode,
       'sticker_number': stickerNumber,
     };
@@ -29,14 +29,15 @@ class UserStickerModel {
 
   factory UserStickerModel.fromMap(Map<String, dynamic> map) {
     return UserStickerModel(
-      id: map['id']?.toInt() ?? 0,
-      idUser: map['id_user']?.toInt() ?? 0,
-      idSticker: map['id_sticker']?.toInt() ?? 0,
-      duplicate: map['duplicate']?.toInt() ?? 0,
-      stickerCode: map['sticker_code'] ?? "",
-      stickerNumber: map['sticker_number'] ?? "",
+      id: map['id'] ?? 0,
+      idUser: map['id_user'] ?? 0,
+      idSticker: map['id_sticker'] ?? 0,
+      duplicate: map['duplicate_stickers'] ?? 0,
+      stickerCode: map['sticker_code'] ?? '',
+      stickerNumber: map['sticker_number'] ?? '',
     );
   }
+
   String toJson() => json.encode(toMap());
 
   factory UserStickerModel.fromJson(String source) =>

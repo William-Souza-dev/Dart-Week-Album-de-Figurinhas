@@ -1,3 +1,4 @@
 abstract class FwcPresenter<V> {
-  set view(V view);
+  //Interface abstrata recebe uma view
+  set view(V view); //seter obrigatorio de todo presenter
 }

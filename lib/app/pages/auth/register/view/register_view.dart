@@ -1,4 +1,4 @@
 abstract class RegisterView {
-  void registerSucess();
-  void registerEror([String? message]);
+  void registerSuccess();
+  void registerError([String? message]);
 }
