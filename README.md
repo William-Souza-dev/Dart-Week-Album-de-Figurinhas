@@ -1,7 +1,8 @@
-<h2 align="center"> DartWeek 8ª edição - FIFA WORLD CUP Album de Figurinhas </h2>  
+<h2 align="center"> DartWeek - FIFA WORLD CUP Album de Figurinhas </h2>  
 
 
-
+<p align="center">
+      <img src="https://user-images.githubusercontent.com/105791594/196835693-acab5a2f-a221-436e-88a7-57e959789e16.png" width="150" alt="Logo JobTimer"/>
 
 <h2 align="center"> App para você gerir suas figurinhas da copa! Com o padrão de projeto MVP, usando SetState, Integração com backend, filtros e diversos packages auxiliares! </br></br> 
 
